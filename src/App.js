@@ -1,28 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect, useReducer } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AppChild from './AppChild';
 
-class App extends Component {
-  render() {
+export const ThemeContext = React.createContext('light');
+
+const App = () => {
+    const [value, setValue] = useState('light');
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+        <ThemeContext.Provider value={value}>
+            <AppChild />
+            <button onClick={() => setValue('dark')}>Change to Dark</button>
+        </ThemeContext.Provider>   
     );
-  }
 }
 
 export default App;
